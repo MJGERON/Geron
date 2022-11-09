@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Simple Ordering Food</title>
+    <style>
+        body
+        {
+            background-color: #836953 ;
+        }
+        .accordion {
+            background-color: #faf1bb;
+  color: light;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+  font-weight: bold;
+}
+.logo{
+    border: 1px;
+
+
+}
+.bodylogo{
+    border-bottom: 1px solid #836953;
+    background-color: #faf1bb;
+      width: 100%;
+}
+
+
+.active, .accordion:hover {
+  background-color: lightyellow;
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: #faf1bb;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+.button {
+  background-color: #ddd;
+  border: none;
+  color: black;
+  padding: 5px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 16px;
+}
+
+.button:hover {
+  background-color: lightyellow;
+}
+
+body {
+  padding: 100px;
+}
+</style>
+</head>
+
+<body style="font-family:monospace;">
+    <div class="bodylogo">
+        <img class="logo" src="images\banner\gg2.png" width="180px" height="180px">
+    </div>
+    <br>
+    <button class="accordion">Breakfast Menu</button>
+    <div class="panel">
+        <img src="images\breakfast\bacon.png" width="50" height="50">
+        Bacon&nbsp;<input type="button" class="button" value="Add" onclick="b1Pay();">
+        <br>
+        <img src="images\breakfast\egg.png" width="50" height="50">
+        Egg&nbsp;<input type="button" class="button" value="Add" onclick="b2Pay();">
+        <br>
+        <img src="images\breakfast\banana.png" width="50" height="50">
+        Banana&nbsp;<input type="button" class="button" value="Add" onclick="b3Pay();">
+    </div>
+    <button class="accordion">Lunch Menu</button>
+    <div class="panel">
+        <img src="images\lunch\beef-stew.png" width="50" height="50">
+        Beef Stew&nbsp;<input type="button" class="button" value="Add" onclick="l1Pay();">
+        <br>
+        <img src="images\lunch\bento.png" width="50" height="50">
+        Bento&nbsp;<input type="button" class="button" value="Add" onclick="l2Pay();">
+        <br>
+        <img src="images\lunch\salad.png" width="50" height="50">
+        Salad&nbsp;<input type="button" class="button" value="Add" onclick="l3Pay();">
+        <br>
+        <img src="images\lunch\spaghetti.png" width="50" height="50">
+        Spaghetti&nbsp;<input type="button" class="button" value="Add" onclick="l4Pay();">
+        <br>
+        <img src="images\lunch\steak.png" width="50" height="50">
+        Steak&nbsp;<input type="button" class="button" value="Add" onclick="l5Pay();">
+    </div>
+    <button class="accordion">Dinner Menu</button>
+    <div class="panel">
+        <img src="images\dinner\burger.png" width="50" height="50">
+        Burger&nbsp;<input type="button" class="button" value="Add" onclick="d1Pay();">
+        <br>
+        <img src="images\dinner\mac-cheese.png" width="50" height="50">
+        Mac & Cheese&nbsp;<input type="button" class="button" value="Add" onclick="d2Pay();">
+        <br>
+        <img src="images\dinner\pizza.png" width="50" height="50">
+        Pizza&nbsp;<input type="button" class="button" value="Add" onclick="d3Pay();">
+        <br>
+        <img src="images\dinner\ramen.png" width="50" height="50">
+        Ramen&nbsp;<input type="button" class="button" value="Add" onclick="d4Pay();">
+        <br>
+        <img src="images\dinner\chicken.png" width="50" height="50">
+        Chicken&nbsp;<input type="button" class="button" value="Add" onclick="d5Pay();">
+        <br>
+    </div>
+    <br>
+    <button class="accordion">Your order</button>
+    <div class="panel"><br>
+        Total amount of order is <p id="mealQuantity"></p><br>
+        Total Meal Price&nbsp;<p id="totalmeal"></p> <br>
+        Receipt&nbsp;<p id="mealreceipt"></p> <br>
+        Order Price&nbsp;<p id="mealPrice"></p><br>
+        <input type="button" class="button" value="Checkout" onclick="Checkout();">
+        <br>
+    </div>
+    <br>
+    <script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        });
+    }
+
+    var mealTotal = 0;
+    var meal;
+    var mealAdd;
+    var mealOrder = 0;
+    var mealCost;
+    var food = "";
+
+
+    function b1Pay() {
+        meal = 55;
+        mealTotal = mealTotal + meal;
+        mealAdd = 1;
+        mealOrder = mealOrder + mealAdd;
+        mealCost = "₱55 Bacon" + "<br>"
+        food = food + mealCost;
+
+        document.getElementById("mealPrice").innerHTML = "₱" + mealTotal;
+        document.getElementById("mealQuantity").innerHTML = mealOrder;
+        document.getElementById("totalmeal").innerHTML = mealTotal;
+        document.getElementById("mealreceipt").innerHTML = food;
+        return;
+    }
+
+    function b2Pay() {
+        meal = 15;
+        mealTotal = mealTotal + meal;
+        mealAdd = 1;
+        mealOrder = mealOrder + mealAdd;
+        mealCost = "₱15 Egg" + "<br>"
+        food = food + mealCost;
+
+        document.getElementById("mealPrice").innerHTML = "₱" + mealTotal;
+        document.getElementById("mealQuantity").innerHTML = mealOrder;
+        document.getElementById("totalmeal").innerHTML = mealTotal;
+        document.getElementById("mealreceipt").innerHTML = food;
+        return;
+    }
+
+    function b3Pay() {
+        meal = 25;
+        mealTotal = mealTotal + meal;
+        mealAdd = 1;
+        mealOrder = mealOrder + mealAdd;
+        mealCost = "₱15 Banana" + "<br>"
+        food = food + mealCost;
+
+        document.getElementById("mealPrice").innerHTML = "₱" + mealTotal;
+        document.getElementById("mealQuantity").innerHTML = mealOrder;
+        document.getElementById("totalmeal").innerHTML = mealTotal;
+        document.getElementById("mealreceipt").innerHTML = food;
+        return;
+    }
+
+    function l1Pay() {
+        meal = 85;
+        mealTotal = mealTotal + meal;
+        mealAdd = 1;
+        mealOrder = mealOrder + mealAdd;
+        mealCost = "₱85 Beef Stew" + "<br>"
+        food = food + mealCost;
+
+        document.getElementById("mealPrice").innerHTML = "₱" + mealTotal;
+        document.getElementById("mealQuantity").innerHTML = mealOrder;
+        document.getElementById("totalmeal").innerHTML = mealTotal;
+        document.getElementById("mealreceipt").innerHTML = food;
+        return;
+    }
+
+    function l2Pay() {
+        meal = 120;
+        mealTotal = mealTotal + meal;
+        mealAdd = 1;
+        mealOrder = mealOrder + mealAdd;
+        mealCost = "₱120 Bento" + "<br>"
+        food = food + mealCost;
+
+        document.getElementById("mealPrice").innerHTML = "₱" + mealTotal;
+        document.getElementById("mealQuantity").innerHTML = mealOrder;
+        document.getElementById("totalmeal").innerHTML = mealTotal;
+        document.getElementById("mealreceipt").innerHTML = food;
+        return;
+    }
+
+    function l3Pay() {
+        meal = 75;
+        mealTotal = mealTotal + meal;
+        mealAdd = 1;
+        mealOrder = mealOrder + mealAdd;
+        mealCost = "₱75 Salad" + "<br>"
+        food = food + mealCost;
+
+        document.getElementById("mealPrice").innerHTML = "₱" + mealTotal;
+        document.getElementById("mealQuantity").innerHTML = mealOrder;
+        document.getElementById("totalmeal").innerHTML = mealTotal;
+        document.getElementById("mealreceipt").innerHTML = food;
+        return;
+    }
+
+    function l4Pay() {
+        meal = 65;
+        mealTotal = mealTotal + meal;
+        mealAdd = 1;
+        mealOrder = mealOrder + mealAdd;
+        mealCost = "₱65 Spaghetti" + "<br>"
+        food = food + mealCost;
+
+        document.getElementById("mealPrice").innerHTML = "₱" + mealTotal;
+        document.getElementById("mealQuantity").innerHTML = mealOrder;
+        document.getElementById("totalmeal").innerHTML = mealTotal;
+        document.getElementById("mealreceipt").innerHTML = food;
+        return;
+    }
+
+    function l5Pay() {
+        meal = 150;
+        mealTotal = mealTotal + meal;
+        mealAdd = 1;
+        mealOrder = mealOrder + mealAdd;
+        mealCost = "₱150 Steak" + "<br>"
+        food = food + mealCost;
+
+        document.getElementById("mealPrice").innerHTML = "₱" + mealTotal;
+        document.getElementById("mealQuantity").innerHTML = mealOrder;
+        document.getElementById("totalmeal").innerHTML = mealTotal;
+        document.getElementById("mealreceipt").innerHTML = food;
+        return;
+    }
+
+    function d1Pay() {
+        meal = 45;
+        mealTotal = mealTotal + meal;
+        mealAdd = 1;
+        mealOrder = mealOrder + mealAdd;
+        mealCost = "₱45 Burger" + "<br>"
+        food = food + mealCost;
+
+        document.getElementById("mealPrice").innerHTML = "₱" + mealTotal;
+        document.getElementById("mealQuantity").innerHTML = mealOrder;
+        document.getElementById("totalmeal").innerHTML = mealTotal;
+        document.getElementById("mealreceipt").innerHTML = food;
+        return;
+    }
+
+    function d2Pay() {
+        meal = 45;
+        mealTotal = mealTotal + meal;
+        mealAdd = 1;
+        mealOrder = mealOrder + mealAdd;
+        mealCost = "₱45 Mac & Cheese" + "<br>"
+        food = food + mealCost;
+
+        document.getElementById("mealPrice").innerHTML = "₱" + mealTotal;
+        document.getElementById("mealQuantity").innerHTML = mealOrder;
+        document.getElementById("totalmeal").innerHTML = mealTotal;
+        document.getElementById("mealreceipt").innerHTML = food;
+        return;
+    }
+
+    function d3Pay() {
+        meal = 75;
+        mealTotal = mealTotal + meal;
+        mealAdd = 1;
+        mealOrder = mealOrder + mealAdd;
+        mealCost = "₱75 Pizza" + "<br>"
+        food = food + mealCost;
+
+        document.getElementById("mealPrice").innerHTML = "₱" + mealTotal;
+        document.getElementById("mealQuantity").innerHTML = mealOrder;
+        document.getElementById("totalmeal").innerHTML = mealTotal;
+        document.getElementById("mealreceipt").innerHTML = food;
+        return;
+    }
+
+    function d4Pay() {
+        meal = 125;
+        mealTotal = mealTotal + meal;
+        mealAdd = 1;
+        mealOrder = mealOrder + mealAdd;
+        mealCost = "₱125 Ramen" + "<br>"
+        food = food + mealCost;
+
+        document.getElementById("mealPrice").innerHTML = "₱" + mealTotal;
+        document.getElementById("mealQuantity").innerHTML = mealOrder;
+        document.getElementById("totalmeal").innerHTML = mealTotal;
+        document.getElementById("mealreceipt").innerHTML = food;
+        return;
+    }
+
+    function d5Pay() {
+        meal = 65;
+        mealTotal = mealTotal + meal;
+        mealAdd = 1;
+        mealOrder = mealOrder + mealAdd;
+        mealCost = "₱65 Chicken" + "<br>"
+        food = food + mealCost;
+
+        document.getElementById("mealPrice").innerHTML = "₱" + mealTotal;
+        document.getElementById("mealQuantity").innerHTML = mealOrder;
+        document.getElementById("totalmeal").innerHTML = mealTotal;
+        document.getElementById("mealreceipt").innerHTML = food;
+        return;
+    }
+
+    function Checkout() {
+        window.alert("Please Enter your Name, Address, and Amount of Payment");
+        var name, address, payment, overall;
+
+        name = window.prompt("Enter your Name");
+
+        address = window.prompt("Enter your Address");
+
+        payment = window.prompt("Enter your Payment");
+
+        change = payment - mealTotal;
+
+        overall = alert("Hello! " + name + "\n" + "Your order will be delivered in " + address + "\n" + "The amount you paid is " + "₱" + payment + "\n" + "Your change will be " + "₱" + change + "\n" + "Thank you for ordering @HappyCravings!");
+    }
+    </script>
+</body>
+
+</html>
